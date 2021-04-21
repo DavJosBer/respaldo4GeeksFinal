@@ -13,6 +13,10 @@ export const ServiceInfo = () => {
 				{store.services.length > 0 && (
 					<>
 						<h1>{store.services[params.theid].name}</h1>
+						<p>{store.services[params.theid].precio}</p>
+						<p>{store.services[params.theid].catering_service}</p>
+						<p>{store.services[params.theid].decoracion}</p>
+						<p>{store.services[params.theid].dj}</p>
 					</>
 				)}
 			</div>

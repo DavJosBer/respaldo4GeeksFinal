@@ -47,7 +47,10 @@ class Service(db.Model):
             "id": self.id,
             "name": self.name,
             "stock": self.stock,
-            "precio": self.precio
+            "precio": self.precio,
+            "decoracion": self.decoracion,
+            "catering_service": self.catering_service,
+            "dj": self.dj
         }
 
 class ShopCart(db.Model):

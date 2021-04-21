@@ -9,7 +9,7 @@ export const Navbar_main = () => {
 	const { store, actions } = useContext(Context);
 	let favoritesArr = store.favorites;
 	let listMap = favoritesArr.map((item, i) => <Dropdown.Item key={i} index={i} favorite={{ item }} />);
-
+	console.log(listMap);
 	let num = favoritesArr.length;
 
 	return (

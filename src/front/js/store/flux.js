@@ -46,6 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error));
 			},
 			addFavorite: (event, name) => {
+				/*Fetch [POST] https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/shopCart*/
 				setStore({ ...getStore(), favorites: [...getStore().favorites, { name }] });
 			}
 		}
