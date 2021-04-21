@@ -24,7 +24,7 @@ export const Navbar_main = () => {
 					Contáctanos
 				</Link>
 			</Nav>
-			<Nav classname="mr-sm-2">
+			<Nav className="mr-sm-2">
 				<Login_user />
 				<SignUp />
 			</Nav>
