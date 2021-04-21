@@ -9,7 +9,7 @@ import "../../styles/home.scss";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	console.log(store.services[0]);
+	console.log(store.favorites);
 	return (
 		<div className="container text-center mt-5">
 			<div>

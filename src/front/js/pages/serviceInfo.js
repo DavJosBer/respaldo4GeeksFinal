@@ -16,7 +16,9 @@ export const ServiceInfo = () => {
 					</>
 				)}
 			</div>
-			<Button variant="primary">Agregar al Carrito</Button>
+			<Button variant="primary" onClick={() => actions.addFavorite(event, store.services[params.theid].name)}>
+				Agregar al Carrito
+			</Button>
 		</>
 	);
 };

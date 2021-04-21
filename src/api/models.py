@@ -30,6 +30,9 @@ class User(db.Model):
 class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
+    catering_service = db.Column(db.Text)
+    decoracion = db.Column(db.Text)
+    dj = db.Column(db.Text)
     stock = db.Column(db.Integer)
     precio = db.Column(db.Integer)
     client = db.relationship('ShopCart', backref='service', lazy=True)
