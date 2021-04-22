@@ -9,8 +9,11 @@ const DropItem = props => {
 	const { store, actions } = useContext(Context);
 	return (
 		<>
-			<div className="d-flex justify-content-between align-items-center">
-				<a className="dropdown-item">{props.favorite.name}</a>
+			<div className="mt-2 border-bottom">
+				<span className="ml-1">
+					<i className="fas fa-trash d-inline" />
+				</span>
+				<a className="dropdown-item d-inline">{props.favorite.name}</a>
 			</div>
 		</>
 	);

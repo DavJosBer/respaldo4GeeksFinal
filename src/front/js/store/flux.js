@@ -59,10 +59,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(response => response.json())
-					.then(result => console.log(getStore().favorites, { id }))
+					.then(result => console.log(result))
+					.then(console.log(getStore().favorites))
 					.catch(error => console.log("error", error));
 				setStore({ ...getStore(), favorites: [...getStore().favorites, { name }] });
 			}
+			// removeFav: (index, name) => {
+
+			//}
 		}
 	};
 };
