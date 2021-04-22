@@ -9,13 +9,12 @@ import "../../styles/home.scss";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	console.log(store.services);
 	return (
 		<div className="container text-center mt-5">
 			<div>
 				<div>
 					<h1 className="text-info fs-1">Party´s Services</h1>
-					<span>{store.token}</span>
+					{/*<span>{store.token}</span>*/}
 				</div>
 				<Carousel>
 					<Carousel.Item>

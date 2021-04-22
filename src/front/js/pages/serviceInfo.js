@@ -20,7 +20,16 @@ export const ServiceInfo = () => {
 					</>
 				)}
 			</div>
-			<Button variant="primary" onClick={() => actions.addFavorite(event, store.services[params.theid].name)}>
+			<Button
+				variant="primary"
+				onClick={() => {
+					actions.addFavorite(
+						event,
+						store.services[params.theid].name,
+						store.services[params.theid].precio,
+						store.services[params.theid].id
+					);
+				}}>
 				Agregar al Carrito
 			</Button>
 		</>

@@ -45,8 +45,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log(error));
 			},
-			addFavorite: (event, name) => {
-				/*Fetch [POST] https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/shopCart*/
+			addFavorite: (event, name, precio, id) => {
+				fetch("https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/shopCart", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${getStore().token}`
+					},
+					body: JSON.stringify({
+						service_id: `${id}`,
+						precio: `${precio}`,
+						cantidad: 1
+					})
+				})
+					.then(response => response.json())
+					.then(result => console.log(getStore().favorites, { id }))
+					.catch(error => console.log("error", error));
 				setStore({ ...getStore(), favorites: [...getStore().favorites, { name }] });
 			}
 		}
