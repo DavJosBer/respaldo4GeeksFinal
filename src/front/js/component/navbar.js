@@ -11,9 +11,11 @@ const DropItem = props => {
 		<>
 			<div className="mt-2 border-bottom">
 				<span className="ml-1">
-					<i className="fas fa-trash d-inline" />
+					<i className="fas fa-trash d-inline" onClick={() => actions.removeFav(props.favorite)} />
 				</span>
-				<a className="dropdown-item d-inline">{props.favorite.name}</a>
+				<a className="dropdown-item d-inline">
+					{props.favorite.name} - ¢{props.favorite.precio}
+				</a>
 			</div>
 		</>
 	);

@@ -1,13 +1,14 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			url: "https://3001-amethyst-crawdad-ou8lzqtn.ws-us03.gitpod.io/api",
 			token: "",
 			services: [],
 			favorites: []
 		},
 		actions: {
 			signup_user: (email, username, password, address) => {
-				fetch("https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/signup", {
+				fetch(`${getStore().url}/signup`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
@@ -22,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("error", error));
 			},
 			login_user: (username, password) => {
-				fetch("https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/login", {
+				fetch(`${getStore().url}/login`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
@@ -38,15 +39,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("error", error));
 			},
 			get_services: async () => {
-				let result = await fetch("https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api")
+				let result = await fetch(getStore().url)
 					.then(res => res.json())
 					.then(data => {
 						setStore({ services: data });
 					})
 					.catch(error => console.log(error));
 			},
-			addFavorite: (event, name, precio, id) => {
-				fetch("https://3001-scarlet-prawn-4k7zh1bj.ws-us03.gitpod.io/api/shopCart", {
+			addFavorite: (event, name, precio, id, index) => {
+				fetch(`${getStore().url}/shopCart`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -59,14 +60,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(response => response.json())
-					.then(result => console.log(result))
-					.then(console.log(getStore().favorites))
+					// .then(result => console.log(result))
+					.then(console.log(getStore()))
 					.catch(error => console.log("error", error));
-				setStore({ ...getStore(), favorites: [...getStore().favorites, { name }] });
+				setStore({ ...getStore(), favorites: [...getStore().favorites, { name, precio }] });
+			},
+			removeFav: index => {
+				const array = getStore().favorites;
+				const newFav = array.filter(value => {
+					return value != index;
+				});
+				setStore({ favorites: newFav });
+				console.log(newFav);
 			}
-			// removeFav: (index, name) => {
-
-			//}
 		}
 	};
 };
