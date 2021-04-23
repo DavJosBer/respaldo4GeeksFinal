@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			url: "https://3001-amethyst-crawdad-ou8lzqtn.ws-us03.gitpod.io/api",
+			url: "https://3001-azure-sparrow-yy1pzp4k.ws-us03.gitpod.io/api",
 			token: "",
 			services: [],
 			favorites: []
@@ -65,7 +65,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("error", error));
 				setStore({ ...getStore(), favorites: [...getStore().favorites, { name, precio }] });
 			},
-			removeFav: index => {
+			removeFav: (index, id) => {
+				fetch(`${getStore().url}/shopCart`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${getStore().token}`
+					},
+					body: JSON.stringify({
+						id: `${id}`
+					})
+				})
+					.then(response => response.json())
+					// .then(result => console.log(result))
+					.then(console.log(getStore()))
+					.catch(error => console.log("error", error));
 				const array = getStore().favorites;
 				const newFav = array.filter(value => {
 					return value != index;
