@@ -2,6 +2,8 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import re
+import os
+import sendgrid
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Ordenes, Service, ShopCart, Factura
 from api.utils import generate_sitemap, APIException
@@ -11,6 +13,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from sendgrid.helpers.mail import *
 
 api = Blueprint('api', __name__)
 
@@ -92,10 +95,45 @@ def login():
 
 #**********************************************************************************************
 
+#Reset Password
+
+@api.route("/reset", methods=["POST"])
+def reset_password():
+    username = request.json.get("username", None)
+    email = request.json.get("email", None)
+
+    if username is None:
+        return jsonify({"msg": "Username is required"}), 400
+    if email is None:
+        return jsonify({"msg": "Email is required"}), 401
+    
+    user = User.query.filter_by(username=username).one_or_none()
+
+    if not user:
+        return jsonify({"msg": "Username doesn't exist"}), 400
+    if not user.check_email(email):
+        return jsonify({"msg": "Invalid email"}), 401
+    
+    password = user.password
+    
+    sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+    from_email = Email("partysservices@gmail.com")
+    to_email = To(email)
+    subject = "Reset Password"
+    content = Content("text/plain", "Your password is : " + password)
+    mail = Mail(from_email, to_email, subject, content)
+    response = sg.client.mail.send.post(request_body=mail.get())
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+
+
+#***********************************************************************************************
+
 #shopCart access, add services
 
 @api.route('/shopCart', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def create_shopCart():
     current_user_id = get_jwt_identity()
     
@@ -130,7 +168,7 @@ def create_shopCart():
 #Delete articles in shopCart
 
 @api.route('/shopCart', methods=['DELETE'])
-@jwt_required()
+# @jwt_required()
 def delete_favorites():
     current_user_id = get_jwt_identity()
     body = request.get_json()

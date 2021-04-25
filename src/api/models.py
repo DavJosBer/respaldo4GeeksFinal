@@ -26,6 +26,8 @@ class User(db.Model):
         }
     def check_password(self, password):
         return safe_str_cmp(password, self.password)
+    def check_email(self, email):
+        return safe_str_cmp(email, self.email)
 
 class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -29,6 +29,7 @@ export const ServiceInfo = () => {
 						store.services[params.theid].precio,
 						store.services[params.theid].id
 					);
+					console.log(store.favorites);
 				}}>
 				Agregar al Carrito
 			</Button>

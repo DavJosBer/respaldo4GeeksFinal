@@ -17,7 +17,7 @@ const DropItem = props => {
 					/>
 				</span>
 				<a className="dropdown-item d-inline">
-					{props.favorite.name} - ¢{props.favorite.precio}
+					{props.favorite.name} - ¢{props.favorite.precio} - {props.favorite.id}
 				</a>
 			</div>
 		</>
@@ -33,6 +33,7 @@ export const Navbar_main = () => {
 	let serviceArray = store.favorites;
 	let serviceMap = serviceArray.map((item, index) => <DropItem key={index} index={index} favorite={item} />);
 	let num = serviceArray.length;
+	console.log(serviceArray);
 	return (
 		<Navbar className="container">
 			<Navbar.Brand>
