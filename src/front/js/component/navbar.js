@@ -5,6 +5,12 @@ import { Navbar, Image, Nav, DropdownButton, ButtonGroup, Button, Dropdown, Badg
 import { Login_user } from "../component/login";
 import { SignUp } from "../component/signup";
 import PropTypes from "prop-types";
+
+/* Need to fix -> BUG:
+	Carrito agrega y sigue el consecutivo del array add=123456 - delete=654321 newAdd= 123456
+	Base de datos sigue consecutivo constante add=123456789 delete=987654321 newAdd= 10111213
+*/
+
 const DropItem = props => {
 	const { store, actions } = useContext(Context);
 	return (
