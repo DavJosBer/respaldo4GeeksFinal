@@ -74,6 +74,7 @@ class ShopCart(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey('service.id'))
     precio = db.Column(db.Integer)
     cantidad = db.Column(db.Integer)
+    name = db.Column(db.String(250))
     
 
     def __repr__(self):
@@ -84,7 +85,8 @@ class ShopCart(db.Model):
             "id": self.id,
             "cantidad": self.cantidad,
             "precio": self.precio,
-            "service_id": self.service_id
+            "service_id": self.service_id,
+            "name": self.name
         }
 
 class Ordenes(db.Model):
