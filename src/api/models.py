@@ -9,7 +9,8 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    address = db.Column(db.String(250)) 
+    address = db.Column(db.String(250))
+    administrador = db.Column(db.Boolean, default = False)
     client = db.relationship('ShopCart', backref='user', lazy=True)
     client_order = db.relationship('Ordenes', backref='user', lazy=True)
     client_recipt = db.relationship('Factura', backref='user', lazy=True)
@@ -22,7 +23,8 @@ class User(db.Model):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "address": self.address
+            "address": self.address,
+            "user_type": self.user_type
         }
     def check_password(self, password):
         return safe_str_cmp(password, self.password)
