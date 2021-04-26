@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		/*Almacena los datos de manera global para ser usados en components, pages, index o layout*/
 		store: {
-			url: "https://3001-orange-firefly-q9g8jd1a.ws-us03.gitpod.io/api",
+			url: "https://3001-emerald-gull-pdl71g1q.ws-us03.gitpod.io/api",
 			token: "",
 			services: [],
 			favorites: []

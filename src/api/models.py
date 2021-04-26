@@ -9,7 +9,8 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    address = db.Column(db.String(250)) 
+    address = db.Column(db.String(250))
+    administrador = db.Column(db.Boolean, default = False)
     client = db.relationship('ShopCart', backref='user', lazy=True)
     client_order = db.relationship('Ordenes', backref='user', lazy=True)
     client_recipt = db.relationship('Factura', backref='user', lazy=True)
@@ -22,7 +23,8 @@ class User(db.Model):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "address": self.address
+            "address": self.address,
+            "user_type": self.user_type
         }
     def check_password(self, password):
         return safe_str_cmp(password, self.password)
@@ -32,11 +34,17 @@ class User(db.Model):
 class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    catering_service = db.Column(db.Text)
-    decoracion = db.Column(db.Text)
-    dj = db.Column(db.Text)
-    stock = db.Column(db.Integer)
-    precio = db.Column(db.Integer)
+    Bocadillos = db.Column(db.String(240), nullable=True)
+    Entrada = db.Column(db.String(240), nullable=True)
+    Plato_Fuerte = db.Column(db.String(240), nullable=True)
+    Ensalada = db.Column(db.String(240), nullable=True)
+    Bebida = db.Column(db.String(240), nullable=True)
+    Postre = db.Column(db.String(240), nullable=True)
+    Postre = db.Column(db.String(240), nullable=True)
+    Decoracion = db.Column(db.String(240), nullable=True)
+    DJ = db.Column(db.String(240), nullable=True)
+    stock = db.Column(db.Integer, nullable=True)
+    precio = db.Column(db.Integer, nullable=False)
     client = db.relationship('ShopCart', backref='service', lazy=True)
     client_order = db.relationship('Ordenes', backref='service', lazy=True)
     client_recipt = db.relationship('Factura', backref='service', lazy=True)
@@ -50,9 +58,14 @@ class Service(db.Model):
             "name": self.name,
             "stock": self.stock,
             "precio": self.precio,
-            "decoracion": self.decoracion,
-            "catering_service": self.catering_service,
-            "dj": self.dj
+            "Bocadillos": self.Bocadillos,
+            "Entrada": self.Entrada,
+            "Plato_Fuerte": self.Plato_Fuerte,
+            "Ensalada": self.Ensalada,
+            "Bebida": self.Bebida,
+            "Postre": self.Postre,
+            "Decoracion": self.Decoracion,
+            "DJ": self.DJ,
         }
 
 class ShopCart(db.Model):
