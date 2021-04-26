@@ -1,3 +1,5 @@
+import { bool } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		/*Almacena los datos de manera global para ser usados en components, pages, index o layout*/
@@ -5,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			url: "https://3001-emerald-gull-pdl71g1q.ws-us03.gitpod.io/api",
 			token: "",
 			services: [],
-			favorites: []
+			favorites: [],
+			administrador: bool
 		},
 		/*Almacena las funciones que llenan el store*/
 		actions: {
@@ -43,8 +46,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(result => {
-						//setStore({ favlist: result.favorites });
 						setStore({ token: result.token });
+						setStore({ administrador: result.administrador });
+						// console.log(result);
+						// console.log(resul.administrador);
 					})
 					.catch(error => console.log("error", error));
 			},

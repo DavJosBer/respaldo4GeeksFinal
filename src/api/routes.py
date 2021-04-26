@@ -91,7 +91,7 @@ def login():
     
     expiration = timedelta(days=1)
     access_token = create_access_token(identity=user, expires_delta=expiration)
-    return jsonify({"token":access_token}), 200
+    return jsonify({"token":access_token, "administrador":user.administrador}), 200
 
 #**********************************************************************************************
 
@@ -133,7 +133,7 @@ def reset_password():
 #shopCart access, add services
 
 @api.route('/shopCart', methods=['POST'])
-# @jwt_required()
+@jwt_required()
 def create_shopCart():
     current_user_id = get_jwt_identity()
     
