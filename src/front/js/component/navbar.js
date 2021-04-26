@@ -17,29 +17,25 @@ const DropItem = props => {
 		<>
 			<div className="mt-2 border-bottom">
 				<span className="ml-1">
-					<i
-						className="fas fa-trash d-inline"
-						onClick={() => actions.removeFav(props.favorite, props.index)}
-					/>
+					<i className="fas fa-trash d-inline" onClick={() => actions.removeFav(props.id)} />
 				</span>
 				<a className="dropdown-item d-inline">
-					{props.favorite.name} - ¢{props.favorite.precio} - {props.favorite.id}
+					{props.name} ¢{props.precio}
 				</a>
 			</div>
 		</>
 	);
 };
 DropItem.proptypes = {
-	favorite: PropTypes.object,
+	name: PropTypes.string,
+	id: PropTypes.number,
+	precio: PropTypes.number,
 	index: PropTypes.number
 };
 
 export const Navbar_main = () => {
 	const { store, actions } = useContext(Context);
-	let serviceArray = store.favorites;
-	let serviceMap = serviceArray.map((item, index) => <DropItem key={index} index={index} favorite={item} />);
-	let num = serviceArray.length;
-	console.log(serviceArray);
+	let num = store.favorites.length;
 	return (
 		<Navbar className="container">
 			<Navbar.Brand>
@@ -76,7 +72,9 @@ export const Navbar_main = () => {
 					<span className="badge badge-light ml-2">{num}</span>
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					{serviceMap}
+					{store.favorites.map((item, index) => (
+						<DropItem key={index} name={item.name} id={item.id} precio={item.precio} />
+					))}
 				</div>
 			</div>
 		</Navbar>

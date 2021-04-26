@@ -91,7 +91,11 @@ def login():
     
     expiration = timedelta(days=1)
     access_token = create_access_token(identity=user, expires_delta=expiration)
-    return jsonify({"token":access_token, "administrador":user.administrador}), 200
+
+    user_shopCart = ShopCart.query.filter_by(user_id=user.id)
+    user_shopCart = list(map(lambda x: x.serialize(), user_shopCart))
+
+    return jsonify({"token":access_token, "administrador":user.administrador, "favorites": user_shopCart}), 200
 
 #**********************************************************************************************
 
@@ -154,6 +158,7 @@ def create_shopCart():
     shopCart.service_id = body['service_id']
     shopCart.precio = body['precio']
     shopCart.cantidad = body['cantidad']
+    shopCart.name = body['name']
 
     db.session.add(shopCart) # agrega el favorito a la base de datos
     db.session.commit() # guarda los cambios
@@ -168,7 +173,7 @@ def create_shopCart():
 #Delete articles in shopCart
 
 @api.route('/shopCart', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def delete_favorites():
     current_user_id = get_jwt_identity()
     body = request.get_json()

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -10,8 +10,15 @@ export const ServiceInfo = () => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		actions.addFavorite(event, store.services[params.theid].name);
+		actions.addFavorite(
+			store.services[params.theid].name,
+			store.services[params.theid].precio,
+			store.services[params.theid].id
+		);
 	};
+
+	const [input, setInput] = useState(0);
+
 	return (
 		<>
 			<div className="card-header bg-white">
@@ -46,7 +53,12 @@ export const ServiceInfo = () => {
 						<Container style={{ maxWidth: "400px" }}>
 							<Form onSubmit={event => handleSubmit(event)}>
 								<Form.Group>
-									<Form.Control type="number" placeholder="Cantidad de Personas" />
+									<Form.Control
+										type="number"
+										placeholder="Cantidad de Personas"
+										value={input}
+										onChange={event => setInput(event.target.value)}
+									/>
 								</Form.Group>
 								<Button variant="primary" type="submit">
 									Agregar al Carrito
