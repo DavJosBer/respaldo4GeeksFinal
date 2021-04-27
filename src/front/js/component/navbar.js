@@ -6,11 +6,6 @@ import { Login_user } from "../component/login";
 import { SignUp } from "../component/signup";
 import PropTypes from "prop-types";
 
-/* Need to fix -> BUG:
-	Carrito agrega y sigue el consecutivo del array add=123456 - delete=654321 newAdd= 123456
-	Base de datos sigue consecutivo constante add=123456789 delete=987654321 newAdd= 10111213
-*/
-
 const DropItem = props => {
 	const { store, actions } = useContext(Context);
 	return (
@@ -20,7 +15,7 @@ const DropItem = props => {
 					<i className="fas fa-trash d-inline" onClick={() => actions.removeFav(props.id)} />
 				</span>
 				<a className="dropdown-item d-inline">
-					{props.name} ¢{props.precio}
+					{props.name} ¢{props.precio} {props.cantidad}
 				</a>
 			</div>
 		</>
@@ -30,7 +25,8 @@ DropItem.proptypes = {
 	name: PropTypes.string,
 	id: PropTypes.number,
 	precio: PropTypes.number,
-	index: PropTypes.number
+	index: PropTypes.number,
+	cantidad: PropTypes.number
 };
 
 export const Navbar_main = () => {
@@ -73,7 +69,13 @@ export const Navbar_main = () => {
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					{store.favorites.map((item, index) => (
-						<DropItem key={index} name={item.name} id={item.id} precio={item.precio} />
+						<DropItem
+							key={index}
+							name={item.name}
+							id={item.id}
+							precio={item.precio}
+							cantidad={item.cantidad}
+						/>
 					))}
 				</div>
 			</div>

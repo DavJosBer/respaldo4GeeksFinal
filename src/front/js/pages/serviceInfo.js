@@ -13,7 +13,8 @@ export const ServiceInfo = () => {
 		actions.addFavorite(
 			store.services[params.theid].name,
 			store.services[params.theid].precio,
-			store.services[params.theid].id
+			store.services[params.theid].id,
+			input
 		);
 	};
 
