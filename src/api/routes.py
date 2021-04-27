@@ -91,7 +91,11 @@ def login():
     
     expiration = timedelta(days=1)
     access_token = create_access_token(identity=user, expires_delta=expiration)
-    return jsonify({"token":access_token}), 200
+
+    user_shopCart = ShopCart.query.filter_by(user_id=user.id)
+    user_shopCart = list(map(lambda x: x.serialize(), user_shopCart))
+
+    return jsonify({"token":access_token, "administrador":user.administrador, "favorites": user_shopCart}), 200
 
 #**********************************************************************************************
 

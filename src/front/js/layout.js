@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { Home } from "./pages/home";
 import { ServiceInfo } from "./pages/serviceInfo";
+import { Articles } from "./pages/articles";
 import injectContext from "./store/appContext";
 
 import { Navbar_main } from "./component/navbar";
@@ -24,6 +25,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/service/:theid">
 						<ServiceInfo />
+					</Route>
+					<Route exact path="/articles">
+						<Articles />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>

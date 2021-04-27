@@ -1,10 +1,13 @@
+import { bool } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		/*Almacena los datos de manera global para ser usados en components, pages, index o layout*/
 		store: {
 			token: "",
 			services: [],
-			favorites: []
+			favorites: [],
+			administrador: bool
 		},
 		/*Almacena las funciones que llenan el store*/
 		actions: {
@@ -42,8 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(result => {
-						//setStore({ favlist: result.favorites });
 						setStore({ token: result.token });
+						setStore({ administrador: result.administrador });
+						setStore({ favorites: result.favorites });
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -78,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				a continuación realiza la función de fetch convirtiendo los parametros en formato JSON
 				a continuación llena la base de datos de shopCart
 			*/
-			addFavorite: (name, precio, id) => {
+			addFavorite: (name, precio, id, cantidad) => {
 				fetch(`${process.env.BACKEND_URL}/api/shopCart`, {
 					method: "POST",
 					headers: {
@@ -89,7 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						name: `${name}`,
 						service_id: `${id}`,
 						precio: `${precio}`,
-						cantidad: 1
+						cantidad: `${cantidad}`
 					})
 				})
 					.then(response => response.json())
