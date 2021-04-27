@@ -2,7 +2,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		/*Almacena los datos de manera global para ser usados en components, pages, index o layout*/
 		store: {
-			url: "https://3001-orange-firefly-q9g8jd1a.ws-us03.gitpod.io/api",
 			token: "",
 			services: [],
 			favorites: []
@@ -14,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				a continuación llena la base de datos de signup
 			*/
 			signup_user: (email, username, password, address) => {
-				fetch(`${getStore().url}/signup`, {
+				fetch(`${process.env.BACKEND_URL}/api/signup`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
@@ -33,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				a continuación llena la base de datos de signup
 			*/
 			login_user: (username, password) => {
-				fetch(`${getStore().url}/login`, {
+				fetch(`${process.env.BACKEND_URL}/api/login`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
@@ -53,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				el fetch envía un email con la password definida por el usuario
 			*/
 			reset_password: (username, email) => {
-				fetch(`${getStore().url}/reset`, {
+				fetch(`${process.env.BACKEND_URL}/api/reset`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
@@ -68,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/*Trae mediante la funcion fetch los datos de service almacenados en la base de datos
 			*/
 			get_services: async () => {
-				let result = await fetch(getStore().url)
+				let result = await fetch(`${process.env.BACKEND_URL}/api`)
 					.then(res => res.json())
 					.then(data => {
 						setStore({ services: data });
@@ -79,31 +78,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				a continuación realiza la función de fetch convirtiendo los parametros en formato JSON
 				a continuación llena la base de datos de shopCart
 			*/
-			addFavorite: (event, name, precio, id) => {
-				fetch(`${getStore().url}/shopCart`, {
+			addFavorite: (name, precio, id) => {
+				fetch(`${process.env.BACKEND_URL}/api/shopCart`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${getStore().token}`
 					},
 					body: JSON.stringify({
+						name: `${name}`,
 						service_id: `${id}`,
 						precio: `${precio}`,
 						cantidad: 1
 					})
 				})
 					.then(response => response.json())
-					.then(result => console.log(id))
-
+					.then(result => setStore({ favorites: result }))
 					.catch(error => console.log("error", error));
-				setStore({ ...getStore(), favorites: [...getStore().favorites, { name, precio }] });
+
+				console.log(getStore().favorites);
 			},
 			/*Recibe por parametro el index e id definidos en el shop cart
 				a continuación realiza la función de fetch convirtiendo los parametros en formato JSON
 				a continuación elimina el item la base de datos de shop cart
 			*/
-			removeFav: (index, id) => {
-				fetch(`${getStore().url}/shopCart`, {
+			removeFav: id => {
+				fetch(`${process.env.BACKEND_URL}/api/shopCart`, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -114,15 +114,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(response => response.json())
-					// .then(result => console.log(result))
-					//.then(console.log(id))
+					.then(result => setStore({ favorites: result }))
 					.catch(error => console.log("error", error));
-				const array = getStore().favorites;
-				const newFav = array.filter(value => {
-					return value != index;
-				});
-				setStore({ favorites: newFav });
-				//console.log(newFav);
 			}
 		}
 	};

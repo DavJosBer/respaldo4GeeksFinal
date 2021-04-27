@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { Home } from "./pages/home";
 import { ServiceInfo } from "./pages/serviceInfo";
+import { Acerca } from "./pages/acerca";
 import { Contacto } from "./pages/Contacto";
 import injectContext from "./store/appContext";
 
@@ -25,6 +26,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/service/:theid">
 						<ServiceInfo />
+					</Route>
+					<Route exact path="/acerca">
+						<Acerca />
 					</Route>
 					<Route exact path="/contacto">
 						<Contacto />

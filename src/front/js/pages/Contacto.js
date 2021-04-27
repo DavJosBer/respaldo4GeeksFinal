@@ -11,7 +11,7 @@ export const Contacto = () => {
 					<div className="row">
 						<div className="col-md-10 col-lg-8 mx-auto text-center">
 							<i className="far fa-paper-plane fa-2x mb-2 text-dark" />
-							<h2 className="text-dark mb-5">contáctanos</h2>
+							<h2 className="text-dark mb-5">Contáctanos</h2>
 							<form className="form-inline d-flex">
 								<input
 									className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"

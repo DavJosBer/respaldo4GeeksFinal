@@ -21,7 +21,7 @@ api = Blueprint('api', __name__)
 
 @api.route('/', methods=['GET'])
 def get_service():
-    service = Service.query.all()
+    service = Service.query.order_by("id")
     all_services = list(map(lambda service: service.serialize(), service))
     return jsonify(all_services), 200
 
@@ -133,7 +133,7 @@ def reset_password():
 #shopCart access, add services
 
 @api.route('/shopCart', methods=['POST'])
-# @jwt_required()
+@jwt_required()
 def create_shopCart():
     current_user_id = get_jwt_identity()
     
@@ -154,6 +154,7 @@ def create_shopCart():
     shopCart.service_id = body['service_id']
     shopCart.precio = body['precio']
     shopCart.cantidad = body['cantidad']
+    shopCart.name = body['name']
 
     db.session.add(shopCart) # agrega el favorito a la base de datos
     db.session.commit() # guarda los cambios
@@ -168,7 +169,7 @@ def create_shopCart():
 #Delete articles in shopCart
 
 @api.route('/shopCart', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def delete_favorites():
     current_user_id = get_jwt_identity()
     body = request.get_json()
