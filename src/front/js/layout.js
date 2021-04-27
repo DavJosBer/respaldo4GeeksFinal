@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Home } from "./pages/home";
 import { ServiceInfo } from "./pages/serviceInfo";
 import injectContext from "./store/appContext";
+import { ModuloAdmin } from "./pages/admin";
 
 import { Navbar_main } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -24,6 +25,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/service/:theid">
 						<ServiceInfo />
+					</Route>
+					<Route exact path="/admin">
+						<ModuloAdmin />
 					</Route>
 					<Route>
 						<h1>Not found!</h1>

@@ -58,7 +58,7 @@ export const Home = () => {
 					<h1 className="text-info fs-1">Paquetes Disponibles</h1>
 				</div>
 
-				<div className="d-flex justify-content-between">
+				<div className="flex-row mt-5" style={{ overflow: "auto", width: "1200px", display: "flex" }}>
 					{store.services.map((item, index) => (
 						<Tarjeta key={index} id={index} service={item} />
 					))}
