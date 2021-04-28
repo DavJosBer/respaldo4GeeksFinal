@@ -39,9 +39,6 @@ export const Navbar_main = () => {
 			</Navbar.Brand>
 
 			<Nav className="mr-auto">
-				<Link className="nav-link" to="/servicios">
-					Servicios
-				</Link>
 				<Link className="nav-link" to="/acerca">
 					Acerca de nosotros
 				</Link>

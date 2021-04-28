@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 import { Button, Modal, Form } from "react-bootstrap";
 
 export function Login_user() {
+	const [validated, setValidated] = useState(true);
+
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
 	const [show2, setShow2] = useState(false);
@@ -23,11 +25,21 @@ export function Login_user() {
 		event.preventDefault();
 		actions.login_user(username, password);
 		setAuth(true);
+
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
 	};
 
 	const handleSubmit2 = event => {
 		event.preventDefault();
 		actions.reset_password(username, email);
+	};
+
+	const changeHandler = event => {
+		this.setState({ [event.target.name]: event.target.value });
 	};
 
 	return (
@@ -41,7 +53,7 @@ export function Login_user() {
 					<Modal.Title>Ingrese su nombre de usuario y contraseña</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={event => handleSubmit(event)}>
+					<Form noValidate validated={validated} onSubmit={event => handleSubmit(event)}>
 						<Form.Group>
 							<Form.Label>Nombre de usuario</Form.Label>
 							<Form.Control
@@ -49,7 +61,12 @@ export function Login_user() {
 								placeholder="Ingrese su nombre de usuario"
 								value={username}
 								onChange={event => setUsername(event.target.value)}
+								className="form-control"
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese el nombre de usuario
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Contraseña</Form.Label>
@@ -58,7 +75,12 @@ export function Login_user() {
 								placeholder="Contraseña"
 								value={password}
 								onChange={event => setPassword(event.target.value)}
+								required
 							/>
+
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese la contraseña
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Button className="m-3" variant="secondary" onClick={handleClose}>
 							Cerrar
@@ -81,7 +103,7 @@ export function Login_user() {
 					<Modal.Title>Ingrese su usuario y su email</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={event => handleSubmit2(event)}>
+					<Form noValidate validated={validated} onSubmit={event => handleSubmit2(event)}>
 						<Form.Group>
 							<Form.Label>Nombre de usuario</Form.Label>
 							<Form.Control
@@ -89,7 +111,11 @@ export function Login_user() {
 								placeholder="Ingrese su nombre de usuario"
 								value={username}
 								onChange={event => setUsername(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese el nombre de usuario
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Email</Form.Label>
@@ -98,7 +124,11 @@ export function Login_user() {
 								placeholder="Email"
 								value={email}
 								onChange={event => setEmail(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese el correo electrónico
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Button className="m-3" variant="secondary" onClick={handleClose2}>
 							Cerrar

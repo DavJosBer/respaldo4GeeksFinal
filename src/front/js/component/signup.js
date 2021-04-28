@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 import { Button, Modal, Form } from "react-bootstrap";
 
 export function SignUp() {
+	const [validated, setValidated] = useState(true);
+
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
 
@@ -21,6 +23,12 @@ export function SignUp() {
 		event.preventDefault();
 		actions.signup_user(email, username, password, address);
 		setAuth(true);
+
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
 	};
 
 	return (
@@ -34,15 +42,19 @@ export function SignUp() {
 					<Modal.Title>Ingrese la información solicitada para registarse como usuario</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={event => handleSubmit(event)}>
-						<Form.Group controlId="formBasicEmail">
+					<Form noValidate validated={validated} onSubmit={event => handleSubmit(event)}>
+						<Form.Group>
 							<Form.Label>Dirección de email</Form.Label>
 							<Form.Control
-								type="email"
-								placeholder="Ingrese su email"
+								type="text"
+								placeholder="Email"
 								value={email}
 								onChange={event => setEmail(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese el correo electrónico
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Nombre de Usuario</Form.Label>
@@ -51,7 +63,11 @@ export function SignUp() {
 								placeholder="Ingrese su nombre de usuario"
 								value={username}
 								onChange={event => setUsername(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese el nombre de usuario
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Contraseña</Form.Label>
@@ -60,7 +76,11 @@ export function SignUp() {
 								placeholder="Contraseña"
 								value={password}
 								onChange={event => setPassword(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese la contraseña
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Dirección de domicilio</Form.Label>
@@ -69,7 +89,11 @@ export function SignUp() {
 								placeholder="Ingrese la dirección de su domicilio"
 								value={address}
 								onChange={event => setAddress(event.target.value)}
+								required
 							/>
+							<Form.Control.Feedback type="invalid">
+								Por favor, ingrese su dirección
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Button className="m-3" variant="secondary" onClick={handleClose}>
 							Cerrar
