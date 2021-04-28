@@ -22,7 +22,6 @@ export const ModuloAdmin = () => {
 };
 
 function AlertDismissible() {
-	//event.preventDefault();
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(true);
 
