@@ -7,6 +7,7 @@ import { Acerca } from "./pages/acerca";
 import { Contacto } from "./pages/Contacto";
 import injectContext from "./store/appContext";
 import { ModuloAdmin } from "./pages/admin";
+import { Articles } from "./pages/articles";
 
 import { Navbar_main } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -28,9 +29,11 @@ const Layout = () => {
 					<Route exact path="/service/:theid">
 						<ServiceInfo />
 					</Route>
-
 					<Route exact path="/admin">
 						<ModuloAdmin />
+					</Route>
+					<Route exact path="/articles">
+						<Articles />
 					</Route>
 					<Route exact path="/acerca">
 						<Acerca />

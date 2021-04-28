@@ -18,7 +18,7 @@ export const ServiceInfo = () => {
 		);
 	};
 
-	const [input, setInput] = useState(0);
+	const [input, setInput] = useState(1);
 
 	return (
 		<>
