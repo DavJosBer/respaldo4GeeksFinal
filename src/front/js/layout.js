@@ -31,13 +31,12 @@ const Layout = () => {
 
 					<Route exact path="/admin">
 						<ModuloAdmin />
-          </Route>
+					</Route>
 					<Route exact path="/acerca">
 						<Acerca />
 					</Route>
 					<Route exact path="/contacto">
 						<Contacto />
-
 					</Route>
 					<Route>
 						<h1>Not found!</h1>
