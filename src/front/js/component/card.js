@@ -8,7 +8,7 @@ import { Card, Button } from "react-bootstrap";
 export const Tarjeta = props => {
 	const { store, actions } = useContext(Context);
 	return (
-		<Card style={{ width: "18rem" }}>
+		<Card style={{ maxWidth: "300px", minWidth: "350px", display: "inline-block" }}>
 			<Card.Img
 				variant="top"
 				src="https://static.smalljoys.me/2020/07/2527082_cumplea%C3%B1os-123_1594326555.jpg"

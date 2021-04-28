@@ -40,7 +40,6 @@ class Service(db.Model):
     Ensalada = db.Column(db.String(240), nullable=True)
     Bebida = db.Column(db.String(240), nullable=True)
     Postre = db.Column(db.String(240), nullable=True)
-    Postre = db.Column(db.String(240), nullable=True)
     Decoracion = db.Column(db.String(240), nullable=True)
     DJ = db.Column(db.String(240), nullable=True)
     stock = db.Column(db.Integer, nullable=True)
