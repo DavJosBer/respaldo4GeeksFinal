@@ -234,3 +234,39 @@ def add_factura():
     return jsonify(user_factura), 200
 
 #***********************************************************************
+
+@api.route('/admin', methods=['POST'])
+#@jwt_required()
+def add_service():
+#    current_user_id = get_jwt_identity() 
+    body = request.get_json()
+    service = Service()
+
+    if 'name' not in body:
+        return jsonify({"msg": "Debe ingresar un nombre del servicio"}),400
+    if 'precio' not in body:
+        return jsonify({"msg": "Debe ingresar un precio para el servicio"}),400
+
+    service.name = body['name']
+    service.Bocadillos = body['Bocadillos']
+    service.Entrada = body['Entrada']
+    service.Plato_Fuerte = body['Plato_Fuerte']
+    service.Ensalada = body['Ensalada']
+    service.Bebida = body['Bebida']
+    service.Postre = body['Postre']
+    service.Decoracion = body['Decoracion']
+    service.DJ = body['DJ']
+    service.stock = body['stock']
+    service.precio = body['precio']
+
+    db.session.add(service)
+    db.session.commit()
+
+    new_service = Service.query.order_by("id")
+    all_services = list(map(lambda service: service.serialize(), new_service))
+
+    response_body = {
+        "confirmacion": "Servicio creado correctamente", "services": all_services
+    }
+
+    return jsonify(response_body),200

@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: "",
 			services: [],
 			favorites: [],
-			administrador: bool
+			administrador: false,
+			msg_create_service: null
 		},
 		/*Almacena las funciones que llenan el store*/
 		actions: {
@@ -99,8 +100,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => setStore({ favorites: result }))
 					.catch(error => console.log("error", error));
-
-				console.log(getStore().favorites);
 			},
 			/*Recibe por parametro el index e id definidos en el shop cart
 				a continuación realiza la función de fetch convirtiendo los parametros en formato JSON
@@ -119,6 +118,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(result => setStore({ favorites: result }))
+					.catch(error => console.log("error", error));
+			},
+
+			addService: (
+				name,
+				Bocadillos,
+				Entrada,
+				Plato_Fuerte,
+				Ensalada,
+				Bebida,
+				Postre,
+				Decoracion,
+				DJ,
+				stock,
+				precio
+			) => {
+				fetch(`${process.env.BACKEND_URL}/api/admin`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						name: `${name}`,
+						Bocadillos: `${Bocadillos}`,
+						Entrada: `${Entrada}`,
+						Plato_Fuerte: `${Plato_Fuerte}`,
+						Ensalada: `${Ensalada}`,
+						Bebida: `${Bebida}`,
+						Postre: `${Postre}`,
+						Decoracion: `${Decoracion}`,
+						DJ: `${DJ}`,
+						stock: `${stock}`,
+						precio: `${precio}`
+					})
+				})
+					.then(response => response.json())
+					.then(result => {
+						setStore({ services: result.services });
+						setStore({ msg_create_service: result.confirmacion });
+					})
 					.catch(error => console.log("error", error));
 			}
 		}

@@ -89,7 +89,7 @@ export function Login_user() {
 							Continuar
 						</Button>
 						<a onClick={handleShow2} className="text-danger">
-							Olvide mi Contraseña
+							Olvidé mi Contraseña
 						</a>
 					</Form>
 					{auth ? <Redirect to="/" /> : null}

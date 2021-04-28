@@ -45,6 +45,13 @@ export const Navbar_main = () => {
 				<Link className="nav-link" to="/contacto">
 					Contáctanos
 				</Link>
+				{store.administrador ? (
+					<Nav>
+						<Link className="nav-link" to="/admin">
+							Módulo de Administración
+						</Link>
+					</Nav>
+				) : null}
 			</Nav>
 			<Nav className="mr-sm-2">
 				<Login_user />
