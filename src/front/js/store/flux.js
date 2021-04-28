@@ -44,11 +44,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: `${password}`
 					})
 				})
-					.then(response => response.json())
-					.then(result => {
-						setStore({ token: result.token });
-						setStore({ administrador: result.administrador });
-						setStore({ favorites: result.favorites });
+					.then(response => {
+						response.json().then(result => {
+							if (response.status === 200) {
+								setStore({ token: result.token });
+								setStore({ administrador: result.administrador });
+								setStore({ favorites: result.favorites });
+							}
+						});
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -83,8 +86,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				a continuación realiza la función de fetch convirtiendo los parametros en formato JSON
 				a continuación llena la base de datos de shopCart
 			*/
-			addFavorite: (name, precio, id, cantidad) => {
-				fetch(`${process.env.BACKEND_URL}/api/shopCart`, {
+			addFavorite: async (name, precio, id, cantidad) => {
+				await fetch(`${process.env.BACKEND_URL}/api/shopCart`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
