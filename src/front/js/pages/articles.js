@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card, Button } from "react-bootstrap";
@@ -11,7 +10,8 @@ export const Articles = () => {
 	console.log(store.favorites);
 
 	let articles = store.favorites;
-
+	let total = [];
+	let bigTotal = 0;
 	return (
 		<>
 			<div className="container">
@@ -26,11 +26,19 @@ export const Articles = () => {
 									Cantidad de personas: {item.cantidad}
 								</Card.Subtitle>
 								<Card.Subtitle className="mb-2 text-danger">
-									Total: ¢{item.precio * item.cantidad}
+									<span className="d-none">{(total[index] = item.precio * item.cantidad)}</span>
+									Total: ¢{total[index]}
 								</Card.Subtitle>
 							</Card.Body>
 						</Card>
 					))}
+				</div>
+				<div>
+					{total.forEach(element => {
+						bigTotal += element;
+						return bigTotal;
+					})}
+					{bigTotal}
 				</div>
 				<div className="d-flex align-items-center justify-content-center mt-4">
 					<Button variant="primary">Proceder al Pago</Button>
