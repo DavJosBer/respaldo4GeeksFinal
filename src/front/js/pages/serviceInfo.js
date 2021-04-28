@@ -22,9 +22,9 @@ export const ServiceInfo = () => {
 
 	return (
 		<>
-			<div className="card-header bg-white">
+			<>
 				{store.services.length > 0 && (
-					<Jumbotron>
+					<Jumbotron className="text-center" style={{ margin: "auto" }}>
 						<h1>{store.services[params.theid].name}</h1>
 						{store.services[params.theid].Bocadillos != null ? (
 							<p>Bocadillos: {store.services[params.theid].Bocadillos}</p>
@@ -51,7 +51,7 @@ export const ServiceInfo = () => {
 						{store.services[params.theid].precio != null ? (
 							<p>Precio por persona: {store.services[params.theid].precio}</p>
 						) : null}
-						<Container style={{ maxWidth: "400px" }}>
+						<Container style={{ maxWidth: "200px" }}>
 							<Form onSubmit={event => handleSubmit(event)}>
 								<Form.Group>
 									<Form.Control
@@ -68,7 +68,7 @@ export const ServiceInfo = () => {
 						</Container>
 					</Jumbotron>
 				)}
-			</div>
+			</>
 		</>
 	);
 };

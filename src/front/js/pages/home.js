@@ -16,7 +16,7 @@ export const Home = () => {
 					<h1 className="text-info fs-1">Party´s Services</h1>
 					{/*<span>{store.token}</span>*/}
 				</div>
-				<Carousel>
+				<Carousel className="m-5">
 					<Carousel.Item>
 						<img
 							src="https://s.ineventos.com/cr/2014/02/109412/catering-services-mk-202265-i-640w.jpg"
@@ -42,7 +42,6 @@ export const Home = () => {
 					</Carousel.Item>
 					<Carousel.Item>
 						<img
-							className=""
 							src="https://retroversion.es/wp-content/uploads/2018/04/Claves-para-contratar-a-un-DJ-para-bodas-fiestas-o-eventos-1.png"
 							height="400"
 							width="1000"
@@ -55,10 +54,10 @@ export const Home = () => {
 				</Carousel>
 
 				<div>
-					<h1 className="text-info fs-1">Paquetes Disponibles</h1>
+					<h1 className="m-5 text-info fs-1">Paquetes Disponibles</h1>
 				</div>
 
-				<div className="flex-row mt-5" style={{ overflow: "auto", width: "1200px", display: "flex" }}>
+				<div className="row mt-5">
 					{store.services.map((item, index) => (
 						<Tarjeta key={index} id={index} service={item} />
 					))}
