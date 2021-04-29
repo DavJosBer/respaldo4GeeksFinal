@@ -11,7 +11,10 @@ export const Articles = () => {
 
 	let articles = store.favorites;
 	let total = [];
-	let bigTotal = 0;
+	let suma = 0;
+	const handleSubmit = suma => {
+		store.total = suma;
+	};
 	return (
 		<>
 			<div className="container">
@@ -33,15 +36,20 @@ export const Articles = () => {
 						</Card>
 					))}
 				</div>
-				<div>
+				<div className="container d-flex align-items-center justify-content-center mt-3">
 					{total.forEach(element => {
-						bigTotal += element;
-						return bigTotal;
+						suma = suma + element;
+						return suma;
 					})}
-					{bigTotal}
+					<div>
+						<p>Total a Pagar:</p>
+						<p className="p-2 bg-light border text-center">{suma}</p>
+					</div>
 				</div>
 				<div className="d-flex align-items-center justify-content-center mt-4">
-					<Button variant="primary">Proceder al Pago</Button>
+					<Button variant="primary" onClick={handleSubmit(suma)}>
+						Proceder al Pago
+					</Button>
 				</div>
 			</div>
 		</>

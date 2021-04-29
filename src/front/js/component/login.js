@@ -78,7 +78,6 @@ export function Login_user() {
 								onChange={event => setPassword(event.target.value)}
 								required
 							/>
-
 							<Form.Control.Feedback type="invalid">
 								Por favor, ingrese la contraseña
 							</Form.Control.Feedback>

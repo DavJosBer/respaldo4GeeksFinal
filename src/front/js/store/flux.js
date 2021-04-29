@@ -1,4 +1,4 @@
-import { bool } from "prop-types";
+import { bool, number } from "prop-types";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			services: [],
 			favorites: [],
 			administrador: false,
-			msg_create_service: null
+			msg_create_service: null,
+			total: number
 		},
 		/*Almacena las funciones que llenan el store*/
 		actions: {
