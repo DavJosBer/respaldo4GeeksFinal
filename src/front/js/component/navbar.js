@@ -54,8 +54,16 @@ export const Navbar_main = () => {
 				) : null}
 			</Nav>
 			<Nav className="mr-sm-2">
-				<Login_user />
-				<SignUp />
+				{store.token === null ? (
+					<>
+						<Login_user />
+						<SignUp />
+					</>
+				) : (
+					<Button variant="danger" onClick={() => actions.sign_out()}>
+						Cerrar Sesión
+					</Button>
+				)}
 			</Nav>
 			<div className="bg-primary d-flex align-items-center justify-content-center px-1 rounded">
 				<Link to="/articles">
