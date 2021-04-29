@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import { Button, Modal, Form } from "react-bootstrap";
 
 export function Login_user() {
-	const [validated, setValidated] = useState(true);
+	const [validated, setValidated] = useState(false);
 
 	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
@@ -30,6 +30,7 @@ export function Login_user() {
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
+			return setValidated(true);
 		}
 	};
 
@@ -85,9 +86,15 @@ export function Login_user() {
 						<Button className="m-3" variant="secondary" onClick={handleClose}>
 							Cerrar
 						</Button>
-						<Button className="m-3" variant="primary" type="submit" onClick={handleClose}>
-							Continuar
-						</Button>
+						{username.length > 0 && password.length > 0 ? (
+							<Button className="m-3" variant="primary" type="submit" onClick={handleClose}>
+								Continuar
+							</Button>
+						) : (
+							<Button className="m-3" variant="primary" type="submit">
+								Continuar
+							</Button>
+						)}
 						<a onClick={handleShow2} className="text-danger">
 							Olvidé mi Contraseña
 						</a>
