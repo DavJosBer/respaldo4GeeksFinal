@@ -14,7 +14,7 @@ export const Home = () => {
 			<div>
 				<div>
 					<h1 className="text-info fs-1">Party´s Services</h1>
-					{/*<span>{store.token}</span>*/}
+					{/* <span>{store.token}</span> */}
 				</div>
 				<Carousel className="m-5">
 					<Carousel.Item>

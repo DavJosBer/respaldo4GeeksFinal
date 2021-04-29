@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		/*Almacena los datos de manera global para ser usados en components, pages, index o layout*/
 		store: {
-			token: "",
+			token: null,
 			services: [],
 			favorites: [],
 			administrador: false,
@@ -163,6 +163,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ msg_create_service: result.confirmacion });
 					})
 					.catch(error => console.log("error", error));
+			},
+
+			sign_out: () => {
+				setStore({ favorites: [] });
+				setStore({ token: null });
+				setStore({ administrador: false });
 			}
 		}
 	};
