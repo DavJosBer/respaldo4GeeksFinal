@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4 Geeks Academy</a>
-		</p>
-	</footer>
-);
+export const Footer = () => {
+	return (
+		<div className="text-center mt-5">
+			<p className="text-white-50 bg-dark text-center ">© Party´s Services 2021</p>
+		</div>
+	);
+};
