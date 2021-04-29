@@ -5,6 +5,7 @@ import { Home } from "./pages/home";
 import { ServiceInfo } from "./pages/serviceInfo";
 import { Acerca } from "./pages/acerca";
 import { Contacto } from "./pages/Contacto";
+import { Pago } from "./pages/payment";
 import injectContext from "./store/appContext";
 import { ModuloAdmin } from "./pages/admin";
 import { Articles } from "./pages/articles";
@@ -34,6 +35,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/articles">
 						<Articles />
+					</Route>
+					<Route exact path="/pago">
+						<Pago />
 					</Route>
 					<Route exact path="/acerca">
 						<Acerca />

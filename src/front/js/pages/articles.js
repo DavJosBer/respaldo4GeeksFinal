@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card, Button } from "react-bootstrap";
 
@@ -47,9 +47,11 @@ export const Articles = () => {
 					</div>
 				</div>
 				<div className="d-flex align-items-center justify-content-center mt-4">
-					<Button variant="primary" onClick={handleSubmit(suma)}>
-						Proceder al Pago
-					</Button>
+					<Link to="pago">
+						<Button variant="primary" onClick={handleSubmit(suma)}>
+							Proceder al Pago
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</>
