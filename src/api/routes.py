@@ -19,6 +19,8 @@ api = Blueprint('api', __name__)
 
 #Devuelve servicios fetch-GET
 
+
+
 @api.route('/', methods=['GET'])
 def get_service():
     service = Service.query.order_by("id")
@@ -130,6 +132,8 @@ def reset_password():
     print(response.status_code)
     print(response.body)
     print(response.headers)
+
+    return jsonify({"msg": "success"}),200
 
 
 #***********************************************************************************************

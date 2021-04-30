@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(response => response.json())
-					.then(result => console.log(username))
+					.then(result => console.log(result))
 					.catch(error => console.log("error", error));
 			},
 			/*Trae mediante la funcion fetch los datos de service almacenados en la base de datos
